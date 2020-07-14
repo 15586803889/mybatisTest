@@ -36,7 +36,7 @@ public class UserMapperTest {
         //获得代理对象
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         //测试通过id查询用户信息的方法
-        User user = userMapper.findOne(10);
+        User user = userMapper.findOne(1);
         System.out.println(user);
         //关闭资源
         sqlSession.close();
@@ -67,11 +67,65 @@ public class UserMapperTest {
         String str = "2019-09-09";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = sdf.parse(str);
-        User user = new User("马汉","1",date,"江苏无锡");
+        User user = new User("马汉","1",date.toString(),"江苏无锡");
 
         //执行插入操作
         userMapper.insert(user);
         System.out.println(user);
+        //提交事务
+        sqlSession.commit();
+        //关闭资源
+        sqlSession.close();
+    }
+
+    @Test
+    public void del() throws Exception{
+        //创建会话对象
+        SqlSession sqlSession = factory.openSession();
+        //获得代理对象
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        System.out.println(userMapper.delUserByid(3));
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    @Test
+    public void edit() throws Exception{
+        //创建会话对象
+        SqlSession sqlSession = factory.openSession();
+        //获得代理对象
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        //封装User对象
+        String str = "2019-09-09";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = sdf.parse(str);
+        User user = new User("马汉","1",date.toString(),"江苏无锡");
+        user.setId(2);
+
+        userMapper.editUser(user);
+        System.out.println(user);
+        //提交事务
+        sqlSession.commit();
+        //关闭资源
+        sqlSession.close();
+    }
+
+    @Test
+    public void searchList() throws Exception{
+        //创建会话对象
+        SqlSession sqlSession = factory.openSession();
+        //获得代理对象
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        //封装User对象
+        String str = "2019-09-09";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = sdf.parse(str);
+        User user = new User("s","0",date.toString(),"江苏无锡");
+        user.setId(15);
+
+        User res = userMapper.selectList(user);
+        System.out.println(res);
         //提交事务
         sqlSession.commit();
         //关闭资源

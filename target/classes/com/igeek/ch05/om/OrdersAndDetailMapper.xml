@@ -25,13 +25,26 @@
             <result column="items_num" property="itemsNum" />
         </collection>
 
+<!--        加入用户集合-->
+        <collection property="userCustom" ofType="UserCustom">
+            <id column="uid" property="id"></id>
+            <id column="username" property="username"></id>
+            <id column="sex" property="sex"></id>
+            <id column="birthday" property="birthday"></id>
+            <id column="address" property="address"></id>
+        </collection>
+
     </resultMap>
 
     <!-- 查询订单及订单明细的信息 -->
     <select id="find" resultMap="map">
-        select o.* , d.id did , d.items_id ,d.items_num
-        from orders o , orderdetail d
-        where o.id = d.orders_id
+        select o.*,u.* ,user_id uid ,d.id did , d.items_id ,d.items_num
+        from orders o , orderdetail d, `user` u
+        where o.id = d.orders_id and u.id in
+        <!--查询用户-->
+            (select user_id FROM orders o , orderdetail d
+            where o.id = d.orders_id)
+
     </select>
 
 </mapper>

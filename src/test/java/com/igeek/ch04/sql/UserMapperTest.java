@@ -72,8 +72,8 @@ public class UserMapperTest {
 
         //封装QueryVO对象
         UserCustom userCustom = new UserCustom();
-        userCustom.setSex("1");
-        userCustom.setUsername("明");  //当前username为""空串或者null，则sql语句不会拼接username条件查询
+        userCustom.setSex("0");
+        userCustom.setUsername("d");  //当前username为""空串或者null，则sql语句不会拼接username条件查询
 
         List<Integer> ids = Arrays.asList(15,20,25);
 

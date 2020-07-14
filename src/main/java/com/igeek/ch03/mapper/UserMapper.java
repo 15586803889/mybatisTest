@@ -1,6 +1,9 @@
 package com.igeek.ch03.mapper;
 
 import com.igeek.pojo.User;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -23,4 +26,14 @@ public interface UserMapper {
 
     //插入用户信息
     public void insert(User user);
+
+    //删除
+    @Delete("delete from user where id=#{id}")
+    public int delUserByid(Integer id);
+
+    //修改
+    @Update("update user set username=#{user.username},sex=#{user.sex},birthday=#{user.birthday},address=#{user.address} where id=#{user.id}")
+    public void editUser(@Param("user")User user);
+
+    public User selectList(User user);
 }

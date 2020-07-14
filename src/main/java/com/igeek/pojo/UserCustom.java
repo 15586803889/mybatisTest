@@ -13,12 +13,12 @@ public class UserCustom extends User {
 
     }
 
-    public UserCustom(String username, String sex, Date birthday, String address, List<OrdersCustom> orderList) {
+    public UserCustom(String username, String sex, String birthday, String address, List<OrdersCustom> orderList) {
         super(username, sex, birthday, address);
         this.orderList = orderList;
     }
 
-    public UserCustom(Integer id, String username, String sex, Date birthday, String address, List<OrdersCustom> orderList) {
+    public UserCustom(Integer id, String username, String sex, String birthday, String address, List<OrdersCustom> orderList) {
         super(id, username, sex, birthday, address);
         this.orderList = orderList;
     }
