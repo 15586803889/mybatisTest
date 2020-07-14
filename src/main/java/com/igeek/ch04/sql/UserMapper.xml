@@ -32,7 +32,7 @@
         select * from user
         <!-- 通过where标签自动去除第一个and -->
         <where>
-            <!-- 引入多个sql片段-->
+            <!-- 引入sql片段-->
             <include refid="user_query"></include>
         </where>
     </select>
